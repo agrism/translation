@@ -1,0 +1,17 @@
+{
+    "name": "paylatergroup/translation",
+    "type": "library",
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "Paylatergroup\\translation\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "require": {}
+}
