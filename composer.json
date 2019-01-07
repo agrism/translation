@@ -1,5 +1,5 @@
 {
-    "name": "paylatergroup/translation",
+    "name": "agrism/translation",
     "type": "library",
     "autoload": {
         "classmap": [
