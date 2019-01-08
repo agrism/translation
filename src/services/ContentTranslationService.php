@@ -19,21 +19,26 @@ class ContentTranslationService implements ITranslation
     public function setConnection($connection)
     {
         $this->connection = $connection;
+        return $this;
     }
 
     public function translate()
     {
 
         $data = $this->getData();
+//        echo '<pre>';print_r($data);
 
         $translation = $this->translationKey;
 
         if (empty($data->translation)) {
             if (empty($data->text)) {
                 $this->insertNewData();
+//                var_dump('INSERT');die;
             } else {
                 $translation = $data->text;
             }
+        } else{
+            $translation = $data->translation;
         }
 
         echo $translation;
@@ -73,7 +78,7 @@ class ContentTranslationService implements ITranslation
             ':key' => $this->translationKey,
         ]);
 
-        return $data->fetch();
+        return $data->fetchObject();
     }
 
     private function insertNewData()

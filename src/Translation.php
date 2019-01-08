@@ -21,10 +21,7 @@ class Translation implements ITranslation
 
         $this->service = $service;
 
-
         return $instance;
-
-        $this->service = $service;
     }
 
     public function translate(){
@@ -32,8 +29,8 @@ class Translation implements ITranslation
     }
 
     public static function __callStatic($name, $args){
-
-
+        $instance = self::getInstance();
+        return $instance->registerService($args[0]);
     }
 
     private static function getInstance(){

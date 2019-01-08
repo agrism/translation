@@ -1,6 +1,6 @@
 <?php
 
-namespace Paylatergroup\translation;
+namespace Paylatergroup\Translation;
 
 
 interface ITranslation
