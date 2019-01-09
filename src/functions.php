@@ -1,51 +1,24 @@
 <?php
 
+use \Paylatergroup\Translation\Translation as Translation;
 
-function _c($key, $options = [], $languageCode = null)
-{
-    try {
+function _c($key, $options =[], $languageCode = null){
 
+    $service = Translation::getServices()[Translation::TYPE_CONTENT];
 
-        $configPath = __DIR__
-            . DIRECTORY_SEPARATOR . '..'
-            . DIRECTORY_SEPARATOR . '..'
-            . DIRECTORY_SEPARATOR . '..'
-            . DIRECTORY_SEPARATOR . '..'
-            . DIRECTORY_SEPARATOR . 'config.php';
-
-        if (file_exists($configPath)) {
-            $config = include($configPath);
-        }
-
-        if (empty($config['PDO'])) {
-            throw new Exception('PDO is required!');
-        }
-
-        if (isset($config['CONTENT_SERVICE'])
-            && in_array('Paylatergroup\Translation\ITranslation', class_implements($config['CONTENT_SERVICE']))
-        ) {
-            $transService = new $config['CONTENT_SERVICE'];
-        } else {
-            $transService = new \Paylatergroup\Translation\Services\ContentTranslationService();
-        }
-
-        $transService->setConnection($config['PDO'])
-            ->setTranslationKey($key)
-            ->setLanguageCode($languageCode);
-
-        \Paylatergroup\Translation\Translation::registerService($transService)
-            ->translate();
-    } Catch (Exception $e) {
-        var_dump($e->getMessage());
-    }
+    $service->setTranslationKey($key)
+        ->setLanguageCode($languageCode)
+        ->setOptions($options)
+        ->translate();
 }
 
-//function _i($key, $options = [], $languageCode = null)
-//{
-//
-//    $transService = new DynamoTranslatorService();
-//    $transService->setTranslationKey($key)->setLanguageCode($languageCode);
-//
-//
-//    Translation::registerService($transService)->translate();
-//}
+
+function _i($key, $options =[], $languageCode = null){
+
+    $service = Translation::getServices()[Translation::TYPE_INTERFACE];
+
+    $service->setTranslationKey($key)
+        ->setLanguageCode($languageCode)
+        ->setOptions($options)
+        ->translate();
+}

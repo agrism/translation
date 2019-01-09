@@ -3,46 +3,30 @@
 namespace Paylatergroup\Translation;
 
 
-class Translation implements ITranslation
+class Translation
 {
 
-    private $service;
+    const TYPE_INTERFACE = '_i';
+    const TYPE_CONTENT = '_c';
 
-    private static $instance;
+    private static $services = [];
 
-    public function __construct()
+    private function __construct()
     {
-        self::$instance = $this;
     }
 
-    private function registerService($service){
-
-        $instance = self::getInstance();
-
-        $this->service = $service;
-
-        return $instance;
+    public static function initService($type, ITranslation $service)
+    {
+        self::$services[$type] = $service;
     }
 
-    public function translate(){
-        $this->service->translate();
+    public static function getServices()
+    {
+        return self::$services;
     }
 
-    public static function __callStatic($name, $args){
-        $instance = self::getInstance();
-        return $instance->registerService($args[0]);
+    public static function setLanguageCode($type, $code)
+    {
+        self::$services[$type]->setLanguageCode($code);
     }
-
-    private static function getInstance(){
-        if(!self::$instance){
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    public function __call($name, $args){
-        $this->$name($args[0]);
-    }
-
 }
