@@ -1,6 +1,6 @@
 <?php
 
-namespace Paylatergroup\Translation\services;
+namespace Paylatergroup\Translation\Services;
 
 
 class DynamoService
