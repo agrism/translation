@@ -9,5 +9,7 @@
             "src/functions.php"
         ]
     },
-    "require": {}
+    "require": {
+        "aws/aws-sdk-php": "^3.21"
+    }
 }

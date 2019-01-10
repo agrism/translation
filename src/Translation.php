@@ -27,6 +27,8 @@ class Translation
 
     public static function setLanguageCode($type, $code)
     {
-        self::$services[$type]->setLanguageCode($code);
+        if(isset(self::$services[$type])){
+            self::$services[$type]->setLanguageCode($code);
+        }
     }
 }

@@ -1,19 +1,42 @@
-# register
+# Content
 
 ```
+// register
+
 use \Paylatergroup\Translation\Translation as Translation;
 
 $pdo = new PDO('mysql:host=127.0.0.1:3306;dbname=xx_xxxx', 'root', '');
 
 Translation::initService(Translation::TYPE_CONTENT, new \Paylatergroup\Translation\Services\MysqlService($pdo));
-```
 
-# set/change locale
-```
+// set/change locale
+
 Translation::setLanguageCode(Translation::TYPE_CONTENT,'ru');
+
+// use 
+
+_c('Hello :name, how are you!', [':name'=>'Hugo']);
 ```
 
-# use
+# Interface
 ```
-_c('Hello :name, how are you!', [':name'=>'Hugo']);
+// register
+
+$sdk = new Aws\Sdk([
+    'endpoint'   => 'http://localhost:8000',
+    'region'   => 'us-west-2',
+    'version'  => 'latest'
+]);
+$marshaler = new \Aws\DynamoDb\Marshaler();
+$dynamodb = $sdk->createDynamoDb();
+
+Translation::initService(Translation::TYPE_INTERFACE, new \Paylatergroup\Translation\Services\DynamoService($dynamodb));
+
+// set/change locale
+
+Translation::setLanguageCode(Translation::TYPE_INTERFACE,'ru');
+
+// use
+
+_i('Good morning :name', [':name'=>'Hugo']);
 ```
