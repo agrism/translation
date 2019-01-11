@@ -27,7 +27,7 @@ $sdk = new Aws\Sdk([
     'region'   => 'us-west-2',
     'version'  => 'latest'
 ]);
-$marshaler = new \Aws\DynamoDb\Marshaler();
+
 $dynamodb = $sdk->createDynamoDb();
 
 Translation::initService(Translation::TYPE_INTERFACE, new \Paylatergroup\Translation\Services\DynamoService($dynamodb));
