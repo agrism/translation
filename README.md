@@ -22,6 +22,8 @@ _c('Hello :name, how are you!', [':name'=>'Hugo']);
 ```
 // register
 
+use \Paylatergroup\Translation\Translation as Translation;
+
 $sdk = new Aws\Sdk([
     'endpoint'   => 'http://localhost:8000',
     'region'   => 'us-west-2',
